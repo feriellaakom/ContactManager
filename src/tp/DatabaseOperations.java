@@ -76,7 +76,7 @@ public class DatabaseOperations {
         }
     }
 
-   
+    public static void afficherContact(int id) {}
     }
 
 	
