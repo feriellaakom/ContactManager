@@ -2,6 +2,7 @@ package tp;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -76,8 +77,42 @@ public class DatabaseOperations {
         }
     }
 
-   
+
+
+    public static void listerContacts() {
+        String query = "SELECT * FROM contacts";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            Connection conn = null;
+			Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            System.out.println("Liste des contacts :");
+            while (rs.next()) {
+                System.out.println("ID: " + rs.getInt("id"));
+                System.out.println("Nom: " + rs.getString("nom"));
+                System.out.println("Prénom: " + rs.getString("prenom"));
+                System.out.println("Email: " + rs.getString("email"));
+                System.out.println("--------");
+            }
+
+            rs.close();
+            stmt.close();
+            conn.close();
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
     }
+
+   
+    	
+    	
+    	
+    }
+    
 
 	
 	
